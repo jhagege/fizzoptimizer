@@ -57,10 +57,10 @@ Liste des tâches pour un {role} dans l'industrie {industry} avec les pourcentag
 Limitez la liste à six tâches maximum.
 Assurez-vous de formater la réponse comme suit:
 Tâche: T1
-Pourcentage: <XX%>
-ChatGPT Project: <Description> - Gain: <XX%>
-Generative AI Project: <Description> - Gain: <XX%>
-Machine Learning Project: <Description> - Gain: <XX%>
+Pourcentage: XX%
+ChatGPT Project: <Description> - Gain: XX%
+Generative AI Project: <Description> - Gain: XX%
+Machine Learning Project: <Description> - Gain: XX%
 ...
 """
 
@@ -154,13 +154,13 @@ def cost_improvements():
                 'Machine Learning Project': row.get('Machine Learning Project', 'N/A'),
                 'Machine Learning Productivity Gain': row.get('Machine Learning Productivity Gain', 0),
                 'total_fte_gain': team_members * (
-                            (row['Percentage'] * row.get('ChatGPT Productivity Gain', 0) / 100) + (
-                                row['Percentage'] * row.get('Generative AI Productivity Gain', 0) / 100) + (
-                                        row['Percentage'] * row.get('Machine Learning Productivity Gain', 0) / 100)),
+                        (row['Percentage'] * row.get('ChatGPT Productivity Gain', 0) / 100) + (
+                        row['Percentage'] * row.get('Generative AI Productivity Gain', 0) / 100) + (
+                                row['Percentage'] * row.get('Machine Learning Productivity Gain', 0) / 100)),
                 'total_monetary_gain': ((row['Percentage'] * row.get('ChatGPT Productivity Gain', 0) / 100) + (
-                            row['Percentage'] * row.get('Generative AI Productivity Gain', 0) / 100) + (
-                                                    row['Percentage'] * row.get('Machine Learning Productivity Gain',
-                                                                                0) / 100)) * team_members * average_wage / 100
+                        row['Percentage'] * row.get('Generative AI Productivity Gain', 0) / 100) + (
+                                                row['Percentage'] * row.get('Machine Learning Productivity Gain',
+                                                                            0) / 100)) * team_members * average_wage / 100
             }
             for index, row in df.iterrows()
         ]
