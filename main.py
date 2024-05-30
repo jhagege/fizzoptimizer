@@ -39,7 +39,7 @@ def analyze():
     if isinstance(data, str):
         return data  # Return error message if there's an issue
 
-    df = pd.DataFrame(data, columns=['Task', 'Percentage'])
+    df = pd.DataFrame(data)
 
     # Store the dataframe and additional data in the session
     session['df'] = df.to_json(orient='split')
@@ -68,7 +68,7 @@ Machine Learning Use Case Gain: <XX%>
 """
 
     try:
-        response = openai.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "user", "content": prompt}
@@ -81,15 +81,11 @@ Machine Learning Use Case Gain: <XX%>
 
         raw_text = response.choices[0].message.content.strip()
 
-        # Debug: print raw_text to ensure the response format is as expected
-        print("Response from ChatGPT:\n", raw_text)
-
         # Parse the response
         tasks = []
         current_task = {}
         for line in raw_text.split('\n'):
             line = line.strip()
-            print("Processing line:", line)  # Debug: print each line being processed
             if line.startswith("Tâche:"):
                 if current_task:
                     tasks.append(current_task)
