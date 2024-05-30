@@ -54,13 +54,16 @@ def analyze():
 def get_task_distribution(role, industry):
     prompt = f"""
 Liste des tâches pour un {role} dans l'industrie {industry} avec les pourcentages de temps passés sur chaque tâche.
+Identify tasks for the user's role and industry, browsing "[onetonline.org](http://onetonline.org/)".
+Provide an approximation “percentage of time spent from T1 to T6” based on market benchmark.
+Benchmark existing solutions and use-case from direct concurrents.
 Limitez la liste à six tâches maximum.
 Assurez-vous de formater la réponse comme suit:
 Tâche: T1
 Pourcentage: XX%
-ChatGPT Project: <Description> - Gain: XX%
-Generative AI Project: <Description> - Gain: XX%
-Machine Learning Project: <Description> - Gain: XX%
+How ChatGPT can help with this task: Description - Gain: XX%
+How a Generative AI application can help with this task: Description - Gain: XX%
+How Machine Learning can help with this task: Description - Gain: XX%
 ...
 """
 
@@ -90,16 +93,17 @@ Machine Learning Project: <Description> - Gain: XX%
                 current_task['Task'] = line.replace("Tâche:", "").strip()
             elif line.startswith("Pourcentage:"):
                 current_task['Percentage'] = extract_percentage(line)
-            elif line.startswith("ChatGPT Project:"):
-                parts = line.replace("ChatGPT Project:", "").strip().split(" - Gain: ")
+            elif line.startswith("How ChatGPT can help with this task:"):
+                parts = line.replace("How ChatGPT can help with this task:", "").strip().split(" - Gain: ")
                 current_task['ChatGPT Project'] = parts[0].strip()
                 current_task['ChatGPT Productivity Gain'] = extract_percentage(parts[1])
-            elif line.startswith("Generative AI Project:"):
-                parts = line.replace("Generative AI Project:", "").strip().split(" - Gain: ")
+            elif line.startswith("How a Generative AI application can help with this task:"):
+                parts = line.replace("How a Generative AI application can help with this task:", "").strip().split(
+                    " - Gain: ")
                 current_task['Generative AI Project'] = parts[0].strip()
                 current_task['Generative AI Productivity Gain'] = extract_percentage(parts[1])
-            elif line.startswith("Machine Learning Project:"):
-                parts = line.replace("Machine Learning Project:", "").strip().split(" - Gain: ")
+            elif line.startswith("How Machine Learning can help with this task:"):
+                parts = line.replace("How Machine Learning can help with this task:", "").strip().split(" - Gain: ")
                 current_task['Machine Learning Project'] = parts[0].strip()
                 current_task['Machine Learning Productivity Gain'] = extract_percentage(parts[1])
 

@@ -1,0 +1,11 @@
+Liste des tâches pour un {role} dans l'industrie {industry} avec les pourcentages de temps passés sur chaque tâche.
+Identify tasks for the user's role and industry, browsing "[onetonline.org](http://onetonline.org/)".
+Provide an approximation “percentage of time spent from T1 to T6” based on market benchmark.
+Benchmark existing solutions and use-case from direct concurrents.
+Limitez la liste à six tâches maximum.
+Assurez-vous de formater la réponse comme suit:
+Tâche: T1
+Pourcentage: XX%
+How ChatGPT can help with this task: Description - Gain: XX%
+How a Generative AI application can help with this task: Description - Gain: XX%
+How Machine Learning can help with this task: Description - Gain: XX%
