@@ -58,8 +58,8 @@ Identify tasks for the user's role and industry, browsing "[onetonline.org](http
 Provide an approximation “percentage of time spent from T1 to T6” based on market benchmark.
 Benchmark existing solutions and use-case from direct concurrents.
 Limitez la liste à six tâches maximum.
-Assurez-vous de formater la réponse comme suit:
-Tâche: T1
+Assurez-vous de formater la réponse comme suit (exactement comme ca sans ajout de ** etc.):
+Tâche: T1. Description de la tache
 Pourcentage: XX%
 How ChatGPT can help with this task: Description - Gain: XX%
 How a Generative AI application can help with this task: Description - Gain: XX%
