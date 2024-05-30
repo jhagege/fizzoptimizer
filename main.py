@@ -58,17 +58,14 @@ Limitez la liste à six tâches maximum.
 Assurez-vous de formater la réponse comme suit:
 Tâche: T1
 Pourcentage: <XX%>
-ChatGPT Use Case: <Description>
-ChatGPT Use Case Gain: <XX%>
-Generative AI Use Case: <Description>
-Generative AI Use Case Gain: <XX%>
-Machine Learning Use Case: <Description>
-Machine Learning Use Case Gain: <XX%>
+ChatGPT Project: <Description> - Gain: <XX%>
+Generative AI Project: <Description> - Gain: <XX%>
+Machine Learning Project: <Description> - Gain: <XX%>
 ...
 """
 
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "user", "content": prompt}
@@ -93,18 +90,18 @@ Machine Learning Use Case Gain: <XX%>
                 current_task['Task'] = line.replace("Tâche:", "").strip()
             elif line.startswith("Pourcentage:"):
                 current_task['Percentage'] = extract_percentage(line)
-            elif line.startswith("ChatGPT Use Case:"):
-                current_task['ChatGPT Use Case'] = extract_use_case(line)
-            elif line.startswith("ChatGPT Use Case Gain:"):
-                current_task['ChatGPT Productivity Gain'] = extract_percentage(line)
-            elif line.startswith("Generative AI Use Case:"):
-                current_task['Generative AI Use Case'] = extract_use_case(line)
-            elif line.startswith("Generative AI Use Case Gain:"):
-                current_task['Generative AI Productivity Gain'] = extract_percentage(line)
-            elif line.startswith("Machine Learning Use Case:"):
-                current_task['Machine Learning Use Case'] = extract_use_case(line)
-            elif line.startswith("Machine Learning Use Case Gain:"):
-                current_task['Machine Learning Productivity Gain'] = extract_percentage(line)
+            elif line.startswith("ChatGPT Project:"):
+                parts = line.replace("ChatGPT Project:", "").strip().split(" - Gain: ")
+                current_task['ChatGPT Project'] = parts[0].strip()
+                current_task['ChatGPT Productivity Gain'] = extract_percentage(parts[1])
+            elif line.startswith("Generative AI Project:"):
+                parts = line.replace("Generative AI Project:", "").strip().split(" - Gain: ")
+                current_task['Generative AI Project'] = parts[0].strip()
+                current_task['Generative AI Productivity Gain'] = extract_percentage(parts[1])
+            elif line.startswith("Machine Learning Project:"):
+                parts = line.replace("Machine Learning Project:", "").strip().split(" - Gain: ")
+                current_task['Machine Learning Project'] = parts[0].strip()
+                current_task['Machine Learning Productivity Gain'] = extract_percentage(parts[1])
 
         if current_task:
             tasks.append(current_task)
@@ -115,16 +112,10 @@ Machine Learning Use Case Gain: <XX%>
 
 
 def extract_percentage(text):
-    # Extracts the first percentage value from the text
     match = re.search(r'(\d+)%', text)
     if match:
         return float(match.group(1))
     return 0.0
-
-
-def extract_use_case(text):
-    # Extracts the use case description from the text
-    return text.split(':', 1)[1].strip() if ':' in text else ''
 
 
 @app.route('/cost-improvements')
@@ -154,18 +145,18 @@ def cost_improvements():
         'team_members': team_members,
         'tasks': [
             {
-                'task': row['Task'],
-                'percentage': row['Percentage'],
-                'chatgpt_gain': row.get('ChatGPT Productivity Gain', 0),
-                'chatgpt_use_case': row.get('ChatGPT Use Case', 'N/A'),
-                'generative_ai_gain': row.get('Generative AI Productivity Gain', 0),
-                'generative_ai_use_case': row.get('Generative AI Use Case', 'N/A'),
-                'machine_learning_gain': row.get('Machine Learning Productivity Gain', 0),
-                'machine_learning_use_case': row.get('Machine Learning Use Case', 'N/A'),
-                'total_fte_gain': (row['Percentage'] * row.get('ChatGPT Productivity Gain', 0) / 100) + (
-                            row['Percentage'] * row.get('Generative AI Productivity Gain', 0) / 100) + (
-                                              row['Percentage'] * row.get('Machine Learning Productivity Gain',
-                                                                          0) / 100),
+                'Task': row['Task'],
+                'Percentage': row['Percentage'],
+                'ChatGPT Project': row.get('ChatGPT Project', 'N/A'),
+                'ChatGPT Productivity Gain': row.get('ChatGPT Productivity Gain', 0),
+                'Generative AI Project': row.get('Generative AI Project', 'N/A'),
+                'Generative AI Productivity Gain': row.get('Generative AI Productivity Gain', 0),
+                'Machine Learning Project': row.get('Machine Learning Project', 'N/A'),
+                'Machine Learning Productivity Gain': row.get('Machine Learning Productivity Gain', 0),
+                'total_fte_gain': team_members * (
+                            (row['Percentage'] * row.get('ChatGPT Productivity Gain', 0) / 100) + (
+                                row['Percentage'] * row.get('Generative AI Productivity Gain', 0) / 100) + (
+                                        row['Percentage'] * row.get('Machine Learning Productivity Gain', 0) / 100)),
                 'total_monetary_gain': ((row['Percentage'] * row.get('ChatGPT Productivity Gain', 0) / 100) + (
                             row['Percentage'] * row.get('Generative AI Productivity Gain', 0) / 100) + (
                                                     row['Percentage'] * row.get('Machine Learning Productivity Gain',

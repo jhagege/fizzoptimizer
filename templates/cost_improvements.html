@@ -24,9 +24,9 @@
                 <tr>
                     <th>Task</th>
                     <th>Percentage</th>
-                    <th>ChatGPT Gain</th>
-                    <th>Generative AI Gain</th>
-                    <th>Machine Learning Gain</th>
+                    <th>ChatGPT Project and Gain</th>
+                    <th>Generative AI Project and Gain</th>
+                    <th>Machine Learning Project and Gain</th>
                     <th>Total FTE Gain</th>
                     <th>Total Monetary Gain</th>
                 </tr>
@@ -34,22 +34,22 @@
             <tbody>
                 {% for task in data['tasks'] %}
                 <tr>
-                    <td>{{ task['task'] }}</td>
-                    <td>{{ task['percentage'] }}%</td>
-                    <td data-toggle="tooltip" title="FTE Calculation: {{ task['percentage'] }}% * {{ task['chatgpt_gain'] }}% = {{ (task['percentage'] * task['chatgpt_gain'] / 100) }}%<br>Monetary Calculation: {{ (task['percentage'] * task['chatgpt_gain'] / 100) }}% * {{ data['team_members'] }} * {{ data['average_wage'] }} = ${{ (task['percentage'] * task['chatgpt_gain'] * data['team_members'] * data['average_wage'] / 10000) }}">
-                        {{ task['chatgpt_gain'] }}% - {{ task['chatgpt_use_case'] }}<br>
-                        <strong>{{ (task['percentage'] * task['chatgpt_gain'] / 100) }} FTE</strong><br>
-                        <strong>${{ (task['percentage'] * task['chatgpt_gain'] * data['team_members'] * data['average_wage'] / 10000) }}</strong>
+                    <td>{{ task['Task'] }}</td>
+                    <td>{{ task['Percentage'] }}%</td>
+                    <td data-toggle="tooltip" title="FTE Calculation: {{ task['Percentage'] }}% * {{ task['ChatGPT Productivity Gain'] }}% * {{ data['team_members'] }} = {{ (task['Percentage'] * task['ChatGPT Productivity Gain'] * data['team_members'] / 10000) }}FTE<br>Monetary Calculation: {{ (task['Percentage'] * task['ChatGPT Productivity Gain'] / 100) }}% * {{ data['team_members'] }} * {{ data['average_wage'] }} = ${{ (task['Percentage'] * task['ChatGPT Productivity Gain'] * data['team_members'] * data['average_wage'] / 10000) }}">
+                        {{ task['ChatGPT Productivity Gain'] }}% - {{ task['ChatGPT Project'] }}<br>
+                        <strong>{{ (task['Percentage'] * task['ChatGPT Productivity Gain'] * data['team_members'] / 100) }} FTE</strong><br>
+                        <strong>${{ (task['Percentage'] * task['ChatGPT Productivity Gain'] * data['team_members'] * data['average_wage'] / 10000) }}</strong>
                     </td>
-                    <td data-toggle="tooltip" title="FTE Calculation: {{ task['percentage'] }}% * {{ task['generative_ai_gain'] }}% = {{ (task['percentage'] * task['generative_ai_gain'] / 100) }}%<br>Monetary Calculation: {{ (task['percentage'] * task['generative_ai_gain'] / 100) }}% * {{ data['team_members'] }} * {{ data['average_wage'] }} = ${{ (task['percentage'] * task['generative_ai_gain'] * data['team_members'] * data['average_wage'] / 10000) }}">
-                        {{ task['generative_ai_gain'] }}% - {{ task['generative_ai_use_case'] }}<br>
-                        <strong>{{ (task['percentage'] * task['generative_ai_gain'] / 100) }} FTE</strong><br>
-                        <strong>${{ (task['percentage'] * task['generative_ai_gain'] * data['team_members'] * data['average_wage'] / 10000) }}</strong>
+                    <td data-toggle="tooltip" title="FTE Calculation: {{ task['Percentage'] }}% * {{ task['Generative AI Productivity Gain'] }}% * {{ data['team_members'] }} = {{ (task['Percentage'] * task['Generative AI Productivity Gain'] * data['team_members'] / 10000) }}FTE<br>Monetary Calculation: {{ (task['Percentage'] * task['Generative AI Productivity Gain'] / 100) }}% * {{ data['team_members'] }} * {{ data['average_wage'] }} = ${{ (task['Percentage'] * task['Generative AI Productivity Gain'] * data['team_members'] * data['average_wage'] / 10000) }}">
+                        {{ task['Generative AI Productivity Gain'] }}% - {{ task['Generative AI Project'] }}<br>
+                        <strong>{{ (task['Percentage'] * task['Generative AI Productivity Gain'] * data['team_members'] / 100) }} FTE</strong><br>
+                        <strong>${{ (task['Percentage'] * task['Generative AI Productivity Gain'] * data['team_members'] * data['average_wage'] / 10000) }}</strong>
                     </td>
-                    <td data-toggle="tooltip" title="FTE Calculation: {{ task['percentage'] }}% * {{ task['machine_learning_gain'] }}% = {{ (task['percentage'] * task['machine_learning_gain'] / 100) }}%<br>Monetary Calculation: {{ (task['percentage'] * task['machine_learning_gain'] / 100) }}% * {{ data['team_members'] }} * {{ data['average_wage'] }} = ${{ (task['percentage'] * task['machine_learning_gain'] * data['team_members'] * data['average_wage'] / 10000) }}">
-                        {{ task['machine_learning_gain'] }}% - {{ task['machine_learning_use_case'] }}<br>
-                        <strong>{{ (task['percentage'] * task['machine_learning_gain'] / 100) }} FTE</strong><br>
-                        <strong>${{ (task['percentage'] * task['machine_learning_gain'] * data['team_members'] * data['average_wage'] / 10000) }}</strong>
+                    <td data-toggle="tooltip" title="FTE Calculation: {{ task['Percentage'] }}% * {{ task['Machine Learning Productivity Gain'] }}% * {{ data['team_members'] }} = {{ (task['Percentage'] * task['Machine Learning Productivity Gain'] * data['team_members'] / 10000) }}FTE<br>Monetary Calculation: {{ (task['Percentage'] * task['Machine Learning Productivity Gain'] / 100) }}% * {{ data['team_members'] }} * {{ data['average_wage'] }} = ${{ (task['Percentage'] * task['Machine Learning Productivity Gain'] * data['team_members'] * data['average_wage'] / 10000) }}">
+                        {{ task['Machine Learning Productivity Gain'] }}% - {{ task['Machine Learning Project'] }}<br>
+                        <strong>{{ (task['Percentage'] * task['Machine Learning Productivity Gain'] * data['team_members'] / 100) }} FTE</strong><br>
+                        <strong>${{ (task['Percentage'] * task['Machine Learning Productivity Gain'] * data['team_members'] * data['average_wage'] / 10000) }}</strong>
                     </td>
                     <td data-toggle="tooltip" title="Total FTE Gain">
                         <strong>{{ task['total_fte_gain'] }} FTE</strong>
