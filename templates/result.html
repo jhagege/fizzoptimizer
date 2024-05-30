@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Result</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Analysis Result</h1>
+        <div class="mt-4">
+            {% for table in tables %}
+                {{ table | safe }}
+            {% endfor %}
+        </div>
+        <br>
+        <a href="/download" class="btn btn-success">Download as Excel</a>
+        <a href="/cost-improvements" class="btn btn-info">View Cost Improvements</a>
+    </div>
+</body>
+</html>

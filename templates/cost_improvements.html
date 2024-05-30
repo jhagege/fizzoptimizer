@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cost Improvements</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Cost Improvements for {{ data['role'] }} in {{ data['industry'] }}</h1>
+        <p><strong>Average Wage:</strong> ${{ data['average_wage'] }}</p>
+        <p><strong>Team Members:</strong> {{ data['team_members'] }}</p>
+        <h2>Tasks and Cost Improvements</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Percentage</th>
+                    <th>ChatGPT Gain</th>
+                    <th>Generative AI Gain</th>
+                    <th>Machine Learning Gain</th>
+                    <th>Total FTE Gain</th>
+                    <th>Total Monetary Gain</th>
+                    <th>Detailed Calculations</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in data['tasks'] %}
+                <tr>
+                    <td>{{ task['task'] }}</td>
+                    <td>{{ task['percentage'] }}%</td>
+                    <td>{{ task['chatgpt_gain'] }}% - {{ task['chatgpt_use_case'] }}</td>
+                    <td>{{ task['generative_ai_gain'] }}% - {{ task['generative_ai_use_case'] }}</td>
+                    <td>{{ task['machine_learning_gain'] }}% - {{ task['machine_learning_use_case'] }}</td>
+                    <td>{{ task['total_fte_gain'] }} FTE</td>
+                    <td>${{ task['total_monetary_gain'] }}</td>
+                    <td>
+                        <ul>
+                            <li>ChatGPT: {{ task['percentage'] }}% * {{ task['chatgpt_gain'] }}% = {{ (task['percentage'] * task['chatgpt_gain'] / 100) }}%</li>
+                            <li>Generative AI: {{ task['percentage'] }}% * {{ task['generative_ai_gain'] }}% = {{ (task['percentage'] * task['generative_ai_gain'] / 100) }}%</li>
+                            <li>Machine Learning: {{ task['percentage'] }}% * {{ task['machine_learning_gain'] }}% = {{ (task['percentage'] * task['machine_learning_gain'] / 100) }}%</li>
+                        </ul>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2 class="mt-4">Results</h2>
+        <p><strong>Total FTE Gain:</strong> {{ total_fte_gain }} FTE</p>
+        <p><strong>Total Monetary Gain:</strong> ${{ total_monetary_gain }}</p>
+    </div>
+</body>
+</html>

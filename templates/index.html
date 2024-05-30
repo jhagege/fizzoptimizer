@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Analyzer</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Task Analyzer</h1>
+        <form action="/analyze" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" value="Gestion de projet" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="industry">Industry:</label>
+                <input type="text" id="industry" name="industry" value="IT" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="average_wage">Average Wage:</label>
+                <input type="number" id="average_wage" name="average_wage" value="44000" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="team_members">Team Members:</label>
+                <input type="number" id="team_members" name="team_members" value="3" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+    </div>
+</body>
+</html>
